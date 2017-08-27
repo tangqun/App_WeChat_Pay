@@ -8,7 +8,7 @@ namespace Model_9H.Enums
 {
     public enum PayStateEnum
     {
-        未支付 = 1,
+        未支付 = 1, // 默认值
         支付成功 = 2,
         支付失败 = 3,
         转入退款 = 5,

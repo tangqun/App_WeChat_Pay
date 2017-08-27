@@ -40,12 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAliConfigDAL.cs" />
     <Compile Include="IPayDAL.cs" />
-    <Compile Include="IRedPackDAL.cs" />
-    <Compile Include="IRefundDAL.cs" />
     <Compile Include="ICodeMsgDAL.cs" />
-    <Compile Include="IWxConfigDAL.cs" />
+    <Compile Include="IWXConfigDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

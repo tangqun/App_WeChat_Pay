@@ -8,7 +8,7 @@ namespace Model_9H.Enums
 {
     public enum PayTypeEnum
     {
-        无 = 1,
+        默认值 = 1,
         微信 = 2,
         支付宝 = 3
     }

@@ -11,26 +11,27 @@ using System.Threading.Tasks;
 
 namespace DAL_9H
 {
-    public class WxConfigDAL : IWxConfigDAL
+    public class WXConfigDAL : IWXConfigDAL
     {
-        public WxConfigModel GetByAppId(int appId)
+        public WXConfigModel GetByAuthorizerAppID(string authorizerAppID)
         {
-            string sql = "SELECT * FROM `wxconfig` WHERE AppId=@AppId";
-            DataRow dr = MySqlHelper.ExecuteDataRow(ConfigHelper.ConnStr, sql, new MySqlParameter("@AppId", appId));
+            string sql = "SELECT * FROM `wxconfig` WHERE `authorizer_appid` = @authorizer_appid";
+            DataRow dr = MySqlHelper.ExecuteDataRow(ConfigHelper.ConnStr, sql, new MySqlParameter("@authorizer_appid", authorizerAppID));
+            return EntityToModel(dr);
+        }
+
+        private WXConfigModel EntityToModel(DataRow dr)
+        {
             if (dr != null)
             {
-                WxConfigModel model = new WxConfigModel();
-                model.Id = dr["Id"].ToInt();
-                model.WxAPPID = dr["WxAPPID"].ToString();
-                model.MCHID = dr["MCHID"].ToString();
-                model.KEY = dr["KEY"].ToString();
-                model.APPSECRET = dr["APPSECRET"].ToString();
-                model.SSLCERT_PATH = dr["SSLCERT_PATH"].ToString();
-                model.SSLCERT_PASSWORD = dr["SSLCERT_PASSWORD"].ToString();
-                model.NOTIFY_URL = dr["NOTIFY_URL"].ToString();
-                model.IP = dr["IP"].ToString();
-                model.CallBackUrl = dr["CallBackUrl"].ToString();
-                model.AppId = dr["AppId"].ToInt();
+                WXConfigModel model = new WXConfigModel();
+                model.ID = dr["id"].ToInt();
+                model.AuthorizerAppID = dr["authorizer_appid"].ToString();
+                model.MCHID = dr["mch_id"].ToString();
+                model.KEY = dr["key"].ToString();
+                model.SSLCERT_PATH = dr["sslcert_path"].ToString();
+                model.SSLCERT_PASSWORD = dr["sslcert_password"].ToString();
+                model.NOTIFY_URL = dr["notify_url"].ToString();
                 return model;
             }
             return null;

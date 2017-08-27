@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace IDAL_9H
 {
-    public interface IWxConfigDAL
+    public interface IWXConfigDAL
     {
-        WxConfigModel GetByAppId(int appId);
+        WXConfigModel GetByAuthorizerAppID(string authorizerAppID);
     }
 }

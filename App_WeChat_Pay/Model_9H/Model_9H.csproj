@@ -44,20 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AliConfigModel.cs" />
-    <Compile Include="Enums\AppIdEnum.cs" />
     <Compile Include="Enums\CodeEnum.cs" />
     <Compile Include="Enums\PayStateEnum.cs" />
     <Compile Include="Enums\PayTypeEnum.cs" />
-    <Compile Include="Enums\RStateEnum.cs" />
-    <Compile Include="Enums\SendStateEnum.cs" />
     <Compile Include="PayModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedPackModel.cs" />
-    <Compile Include="RefundModel.cs" />
     <Compile Include="CodeMsgModel.cs" />
     <Compile Include="RESTfulModel.cs" />
-    <Compile Include="WxConfigModel.cs" />
+    <Compile Include="WXConfigModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

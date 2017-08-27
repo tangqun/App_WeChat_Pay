@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +52,10 @@
       <Project>{423c97c2-055b-4023-95dd-02d6a34b547f}</Project>
       <Name>DAL_9H</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Helper_9H\Helper_9H.csproj">
+      <Project>{C48A1F4D-A1A4-457F-A0A6-F33238913917}</Project>
+      <Name>Helper_9H</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IBLL_9H\IBLL_9H.csproj">
       <Project>{3c98994d-0f84-4b15-a818-e5faa852baf7}</Project>
       <Name>IBLL_9H</Name>
@@ -60,6 +68,9 @@
       <Project>{fcfa5dee-52c2-4285-8ad7-e87762b5f6ec}</Project>
       <Name>Model_9H</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
