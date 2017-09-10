@@ -15,9 +15,14 @@ namespace Api_9H.Controllers
         private IPayBLL payBLL = new PayBLL();
 
         [HttpGet]
-        public RESTfulModel UnifiedOrder(string authorizerAppID = "", string openID = "", string outTradeNo = "", int totalFee = 0, string body = "")
+        public RESTfulModel UnifiedOrder(string authorizerAppID = "", string openID = "", int totalFee = 0, string body = "")
         {
-            return payBLL.UnifiedOrder(authorizerAppID, openID, outTradeNo, totalFee, body);
+            return payBLL.UnifiedOrder(authorizerAppID, openID, totalFee, body);
+        }
+
+        public RESTfulModel OrderQuery(string outTradeNo)
+        {
+            return payBLL.OrderQuery(outTradeNo);
         }
     }
 }

@@ -15,9 +15,9 @@ namespace Api_9H.Controllers
         private IPayBLL payBLL = new PayBLL();
 
         [HttpGet]
-        public RESTfulModel UnifiedOrder(string outTradeNo = "", string ip = "", int period = 15, string tradeType = "JSAPI", string openID = "")
+        public RESTfulModel UnifiedOrder(string outTradeNo = "", string ip = "", int period = 15, string tradeType = "JSAPI")
         {
-            return payBLL.WXUnifiedOrder(outTradeNo, ip, period, tradeType, openID);
+            return payBLL.WXUnifiedOrder(outTradeNo, ip, period, tradeType);
         }
 
         [HttpGet]

@@ -24,7 +24,8 @@ namespace BLL_9H
         private IWXConfigDAL wxConfigDAL = new WXConfigDAL();
         private ICodeMsgDAL codeMsgDAL = new CodeMsgDAL();
 
-        public RESTfulModel UnifiedOrder(string authorizerAppID, string openID, string outTradeNo, int totalFee, string body)
+        // 订单和商品做到一块
+        public RESTfulModel UnifiedOrder(string authorizerAppID, string openID, int totalFee, string body)
         {
             try
             {
@@ -41,12 +42,6 @@ namespace BLL_9H
                     return cv_OpenID;
                 }
 
-                RESTfulModel cv_OutTradeNo = ClientValidateOutTradeNo(outTradeNo);
-                if (cv_OutTradeNo.Code != 0)
-                {
-                    return cv_OutTradeNo;
-                }
-
                 RESTfulModel cv_TotalFee = ClientValidateTotalFee(totalFee);
                 if (cv_TotalFee.Code != 0)
                 {
@@ -60,19 +55,14 @@ namespace BLL_9H
                 }
                 #endregion
 
-                #region 验证商户订单是否存在
-                PayModel payModel = payDAL.GetByOutTradeNo(outTradeNo);
-                if (payModel != null)
-                {
-                    return new RESTfulModel() { Code = (int)CodeEnum.商户订单号已存在, Msg = codeMsgDAL.GetByCode((int)CodeEnum.商户订单号已存在) };
-                }
-                #endregion
-
                 DateTime dt = DateTime.Now;
+                Random r = new Random();
+                string outTradeNo = dt.ToString("yyyyMMddHHmmssfff") + r.Next(100000, 999999);
+
                 #region 操作
                 if (payDAL.Insert(authorizerAppID, openID, outTradeNo, totalFee, body, dt))
                 {
-                    return new RESTfulModel() { Code = (int)CodeEnum.成功, Msg = codeMsgDAL.GetByCode((int)CodeEnum.成功) };
+                    return new RESTfulModel() { Code = (int)CodeEnum.成功, Msg = codeMsgDAL.GetByCode((int)CodeEnum.成功), Data = new { outTradeNo = outTradeNo } };
                 }
                 else
                 {
@@ -87,7 +77,14 @@ namespace BLL_9H
             }
         }
 
-        public RESTfulModel WXUnifiedOrder(string outTradeNo, string ip, int period, string tradeType, string openid)
+        public RESTfulModel OrderQuery(string outTradeNo)
+        {
+            PayModel payModel = payDAL.GetByOutTradeNo(outTradeNo);
+
+            return new RESTfulModel() { Code = (int)CodeEnum.成功, Msg = codeMsgDAL.GetByCode((int)CodeEnum.成功) };
+        }
+
+        public RESTfulModel WXUnifiedOrder(string outTradeNo, string ip, int period, string tradeType)
         {
             try
             {
@@ -140,15 +137,7 @@ namespace BLL_9H
                 sortedDictionary_to["trade_type"] = tradeType;
                 if (tradeType == "JSAPI")
                 {
-                    RESTfulModel cv_OpenID = ClientValidateOpenID(openid);
-                    if (cv_OpenID.Code != 0)
-                    {
-                        sortedDictionary_to["openid"] = openid;
-                    }
-                    else
-                    {
-                        return new RESTfulModel() { Code = (int)CodeEnum.OpenID不能为空, Msg = codeMsgDAL.GetByCode((int)CodeEnum.OpenID不能为空) };
-                    }
+                    sortedDictionary_to["openid"] = payModel.OpenID;
                 }
                 #endregion
 
